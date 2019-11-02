@@ -21,7 +21,7 @@ pipeline {
 
       stage('Build Docker Image') {
          steps {
-            withCredentials([string(credentialsId: 'DockerPassword', variable: 'DockerPwd')]) {
+            withCredentials([string(credentialsId: 'DockerPwd', variable: 'DockerPassword')]) {
                sh "docker login -u vedantkdesai -p ${DockerPassword}"
             }
             sh "docker build -t vedantkdesai/apifootball:${BUILD_NUMBER} ."
@@ -30,7 +30,7 @@ pipeline {
 
       stage('Push Docker Image') {
          steps {
-            withCredentials([string(credentialsId: 'DockerPassword', variable: 'DockerPwd')]) {
+            withCredentials([string(credentialsId: 'DockerPwd', variable: 'DockerPassword')]) {
                sh "docker login -u vedantkdesai -p ${DockerPassword}"
             }
             sh "docker push vedantkdesai/apifootball:${BUILD_NUMBER}"
