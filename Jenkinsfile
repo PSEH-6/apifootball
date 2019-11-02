@@ -39,10 +39,9 @@ pipeline {
       
       stage('Run Container') {
         steps {
-            sshagent(['aws-credentials']) {
-               sh "ssh -o StrictHostKeyChecking=no ubuntu@13.58.209.5 sudo docker run -p 8080:8080 --name vedant-docker vedantkdesai/apifootball:${BUILD_NUMBER}"
+            sshagent(['vedant-aws']) {
+               sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-34-211-0-250.us-west-2.compute.amazonaws.com sudo docker run -p 8080:8080 --name apifootball-app vedantkdesai/apifootball:${BUILD_NUMBER}"
             }
-
          }
       }
 
